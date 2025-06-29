@@ -1,6 +1,6 @@
 // components/ProjectCard.tsx
 'use client';
-
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ProjectCard() {
@@ -42,7 +42,8 @@ export default function ProjectCard() {
         <Link href="https://eshopinin.netlify.app/" className="z-10 w-full max-w-sm md:max-w-xl mx-auto mt-24 hover:scale-105 transition-transform duration-300">
           <div className="bg-gray-100 rounded-xl shadow-lg p-6 md:p-8 w-full cursor-pointer">
             <h3 className="text-xl md:text-2xl font-bold text-purple-700 mb-3 md:mb-4 text-center">Ecommerce Website</h3>
-            <img src="/img.png" alt="Smart Watch" className="rounded-md mx-auto mb-3 md:mb-4 w-full h-auto max-h-60 object-contain" />
+
+<Image src="/myproj.jpg" alt="My project" width={400} height={300} />
             <p className="text-sm text-gray-800 mb-2">
               Created a dummy eCommerce website as a personal practice project to enhance my skills in React JS and Tailwind CSS.
             </p>

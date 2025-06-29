@@ -6,25 +6,30 @@ export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("Submitting...");
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
 
-    const result = await res.json();
-    if (result.success) {
-      setStatus("✅ Message sent!");
-      setForm({ name: "", email: "", message: "" });
-    } else {
-      setStatus("❌ Error: " + result.message);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const result = await res.json();
+      if (result.success) {
+        setStatus("✅ Message sent!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("❌ Error: " + result.message);
+      }
+    } catch (error) {
+      setStatus("❌ Error: Failed to send message.");
     }
   };
 
